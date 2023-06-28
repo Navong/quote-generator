@@ -1,5 +1,5 @@
 ```plaintext
-quote-generator-api
+quote-generator
 │
 ├── public/
 ├── src/
