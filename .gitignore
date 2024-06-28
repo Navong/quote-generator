@@ -21,3 +21,17 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+# Additional ignores
+/.gitignore
+/package.json
+/package-lock.json
+/eslint.config.mjs
+/settings.json
+/settings.yaml
+/settings.yml
+
+/.prettierrc
+
+
+
+
