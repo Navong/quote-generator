@@ -3,6 +3,7 @@
 @import './_buttons.scss';
 @import './container.scss';
 @import './searchbox.scss';
+@import './favorite_quotes';
 
 .app {
   display: flex;
@@ -39,8 +40,8 @@
   margin-bottom: 1rem;
   &__list {
     display: flex;
-    flex-direction: row; // Changed to row
-    justify-content: center; // Center the items horizontally
+    flex-direction: row;
+    justify-content: center;
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -48,7 +49,7 @@
   }
 
   &__item {
-    margin-right: 10px; // Add space between items
+    margin-right: 10px;
 
     &:last-child {
       margin-right: 0;
@@ -63,7 +64,7 @@
     display: block;
     padding: 10px;
     text-align: center;
-    border-bottom: none; // Removed border-bottom
+    border-bottom: none;
 
     &:hover,
     &.active {
@@ -84,4 +85,88 @@
 .theme-toggle-container {
   margin-top: 1rem;
   align-self: flex-end;
+}
+
+.favorite-quotes {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+
+  .quote-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    span {
+      width: 100%;
+      margin-bottom: 10px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+
+    button {
+      align-self: flex-end;
+      background-color: var(--button-bg-color);
+      color: var(--button-text-color);
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: var(--button-hover-bg-color);
+      }
+    }
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .favorite-quotes {
+    padding: 0 10px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+
+    button {
+      width: 100%;
+      margin-bottom: 10px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .favorite-quotes {
+    padding: 0 5px;
+  }
+
+  .quote-container {
+    padding: 10px;
+  }
 }

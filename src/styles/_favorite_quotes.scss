@@ -1,0 +1,94 @@
+.favorite-quotes {
+  width: 800px;
+  max-width: 800px;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  transition: padding 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h3 {
+    color: #333;
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.3s ease;
+
+      button {
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #ff3333;
+        }
+      }
+    }
+  }
+}
+
+.dark-mode {
+  .favorite-quotes {
+    h3 {
+      color: #f0f0f0;
+    }
+
+    ul {
+      li {
+        color: #f0f0f0;
+
+        button {
+          background-color: #ff6b6b;
+
+          &:hover {
+            background-color: #ff5252;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Add media queries to match the container's responsive behavior
+@media (max-width: 1024px) {
+  .favorite-quotes {
+    width: 700px;
+    max-width: 700px;
+  }
+}
+
+@media (max-width: 840px) {
+  .favorite-quotes {
+    width: 600px;
+    max-width: 600px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .favorite-quotes {
+    width: 300px;
+    max-width: 300px;
+    padding: 10px;
+  }
+}
