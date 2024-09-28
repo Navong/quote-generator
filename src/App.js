@@ -1,5 +1,5 @@
 import './styles/main.scss';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -14,6 +14,8 @@ import SearchQuotes from './components/SearchQuotes';
 import ThemeToggle from './components/ThemeToggle';
 
 function App() {
+  const [currentQuote, setCurrentQuote] = useState(null);
+
   return (
     <ThemeProvider>
       <FavoriteQuotesProvider>
@@ -46,7 +48,15 @@ function App() {
             <main className="main">
               <div className="container">
                 <Routes>
-                  <Route path="/" element={<QuoteDisplay />} />
+                  <Route
+                    path="/"
+                    element={
+                      <QuoteDisplay
+                        currentQuote={currentQuote}
+                        setCurrentQuote={setCurrentQuote}
+                      />
+                    }
+                  />
                   <Route path="/favorites" element={<FavoriteQuotes />} />
                   <Route path="/search" element={<SearchQuotes />} />
                 </Routes>
