@@ -1,0 +1,6 @@
+@url = https://api.quotable.io
+
+GET {{url}}/quotes?tags=love|Chappiness
+
+###
+# GET https://api.quotable.io/quotes?tags=love%7Chappiness
