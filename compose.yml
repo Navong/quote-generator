@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  quotefront:
+    container_name: quotefront
+    image: quotefront
+    build:
+      context: .
+      dockerfile: src/quotefront.dockerfile
+    restart: always
+    ports:
+      - "3003:3000"
+    labels:
+      - "traefik.http.routers.quotefront.rule=Host(`quote.navong.xyz`)"
+    depends_on:
+      - quoteback
+    networks:
+      - traefik-network
+
+  quoteback:
+    container_name: quoteback
+    image: quoteback
+    ports:
+      - "4001:4000"
+    build:
+      context: .
+      dockerfile: server/quoteback.dockerfile
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@server.navong.xyz:5432/quotable?schema=public
+    labels:
+      - "traefik.http.routers.quoteback.rule=(Host(`quote.navong.xyz`) && PathPrefix(`/api`))"
+    networks:
+      - traefik-network
+
+  # db:
+  #   container_name: quote-db
+  #   image: postgres:14
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #     POSTGRES_DB: quotable
+  #   volumes:
+  #     - postgres-data:/var/lib/postgresql/data
+  #   networks:
+  #     - traefik-network
+
+networks:
+  traefik-network:
+    external: true
+
+volumes:
+  postgres-data:
