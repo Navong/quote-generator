@@ -30,16 +30,25 @@ body {
   border-radius: 10px;
   transition: all 0.3s ease;
 
-  // Remove .search-input styles from here
-
   .dark-mode & {
     background-color: lighten($dark-background, 5%);
     box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-
-    // Remove .search-input styles from here
   }
 
-  // ... rest of the container styles ...
+  @media (max-width: 1024px) {
+    max-width: 90%;
+  }
+
+  @media (max-width: 768px) {
+    width: 95%;
+    padding: 15px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    padding: 10px;
+    border-radius: 0;
+  }
 }
 
 .dark-mode {

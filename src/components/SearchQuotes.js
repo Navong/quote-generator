@@ -2,38 +2,57 @@ import { useState } from 'react';
 import '../styles/main.scss';
 
 const fetchQuotesBySearch = async (query) => {
-  const response = await fetch(
-    `https://api.quotable.io/search/quotes?query=${query}`
-  );
-  const data = await response.json();
-  return data.results;
+  try {
+    const q = 'technology';
+    const response = await fetch(
+      `https://api.quotable.io/search/quotes?tags=${q}`
+    );
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    console.error('Error fetching quotes:', error);
+    throw error;
+  }
 };
 
 const SearchQuotes = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
 
-  const handleSearch = () => {
-    fetchQuotesBySearch(query).then(setResults);
+  const handleSearch = async () => {
+    try {
+      // const searchResults = await fetchQuotesBySearch(query);
+      // setResults(searchResults);
+      alert('Under Development 🧑‍💻');
+    } catch (error) {
+      console.error('Error searching quotes:', error);
+      setResults([]);
+    }
   };
 
   return (
-    <div>
+    <div className="search-container">
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="search-input"
         placeholder="Enter search query"
+        className="search-input"
       />
-      <button onClick={handleSearch}>Search</button>
-      <ul>
-        {results.map((quote) => (
-          <li key={quote._id}>
-            {quote.content} - {quote.author}
-          </li>
-        ))}
-      </ul>
+      <button onClick={handleSearch} className="search-btn">
+        Search
+      </button>
+      {results.length > 0 ? (
+        <ul>
+          {results.map((quote) => (
+            <li key={quote._id}>
+              {quote.content} - {quote.author}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No results found</p>
+      )}
     </div>
   );
 };

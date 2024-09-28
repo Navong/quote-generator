@@ -35,19 +35,23 @@ const FavoriteQuotes = () => {
 
   const currentQuote = quotes[currentIndex];
 
+  const handleRemoveQuote = (quote_id) => {
+    alert('Under Development 🧑‍💻');
+  };
+
   return (
     <div className="favorite-quotes">
       <h3>Favorite Quotes</h3>
       <div className="">
         <div className="quote-content">{currentQuote.content}</div>
-        <div className="quote-author">{currentQuote.author}</div>
+        <div className="quote-author">- {currentQuote.author}</div>
         <div className="button-container">
           <button className="nav-button" onClick={handleNext}>
             &#8592; Previous
           </button>
           <button
             className="remove-button"
-            onClick={() => removeFromFavorites(currentQuote._id)}
+            onClick={() => handleRemoveQuote(currentQuote._id)}
           >
             Remove
           </button>
