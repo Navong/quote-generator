@@ -11,10 +11,13 @@
   max-width: 800px;
   padding: 20px;
   box-sizing: border-box;
-  transition: padding 0.3s ease;
+  transition: padding 0.3s ease, border-radius 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .quote-content {
@@ -24,11 +27,11 @@
   line-height: 1.4;
   margin-bottom: 1rem;
   font-style: italic;
-  overflow-y: auto; // Add scrollbar if content exceeds height
+  overflow-y: auto;
   display: flex;
-  align-items: center; // Center content vertically
-  justify-content: center; // Center content horizontally
-  text-align: center; // Center text within the element
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .quote-author {
@@ -37,9 +40,9 @@
   font-size: clamp(0.9rem, 3vw, 1.1rem);
   text-align: right;
   font-weight: bold;
-  overflow: hidden; // Hide overflow if content exceeds height
-  text-overflow: ellipsis; // Add ellipsis for overflowing text
-  white-space: nowrap; // Prevent wrapping
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @media (max-width: 1024px) {
@@ -50,7 +53,7 @@
 
   .quote-content,
   .quote-author {
-    width: 660px; // 700px - 40px padding
+    width: 660px;
   }
 }
 
@@ -59,11 +62,12 @@
     width: 600px;
     max-width: 600px;
     padding: 15px;
+    border-radius: 8px;
   }
 
   .quote-content,
   .quote-author {
-    width: 570px; // 600px - 30px padding
+    width: 570px;
   }
 
   .quote-content {
@@ -80,11 +84,12 @@
     width: 300px;
     max-width: 300px;
     padding: 10px;
+    border-radius: 6px;
   }
 
   .quote-content,
   .quote-author {
-    width: 280px; // 300px - 20px padding
+    width: 280px;
   }
 
   .quote-content {
