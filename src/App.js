@@ -1,24 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import './styles/main.scss';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  NavLink,
+} from 'react-router-dom';
+import { FavoriteQuotesProvider } from './contexts/FavoriteQuotesContext';
+import { ThemeProvider } from './contexts/ThemeContext';
+import QuoteDisplay from './components/QuoteDisplay';
+import FavoriteQuotes from './components/FavoriteQuotes';
+import SearchQuotes from './components/SearchQuotes';
+import ThemeToggle from './components/ThemeToggle';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider>
+      <FavoriteQuotesProvider>
+        <Router>
+          <div className="app">
+            <header className="header">
+              <div className="header-content">
+                <nav className="nav">
+                  <ul className="nav__list">
+                    <li className="nav__item">
+                      <NavLink to="/" className="nav__link" end>
+                        Home
+                      </NavLink>
+                    </li>
+                    <li className="nav__item">
+                      <NavLink to="/favorites" className="nav__link">
+                        Favorites
+                      </NavLink>
+                    </li>
+                    <li className="nav__item">
+                      <NavLink to="/search" className="nav__link">
+                        Search
+                      </NavLink>
+                    </li>
+                  </ul>
+                </nav>
+                <ThemeToggle />
+              </div>
+            </header>
+            <main className="main">
+              <div className="container">
+                <Routes>
+                  <Route path="/" element={<QuoteDisplay />} />
+                  <Route path="/favorites" element={<FavoriteQuotes />} />
+                  <Route path="/search" element={<SearchQuotes />} />
+                </Routes>
+              </div>
+            </main>
+          </div>
+        </Router>
+      </FavoriteQuotesProvider>
+    </ThemeProvider>
   );
 }
 

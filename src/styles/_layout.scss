@@ -1,0 +1,60 @@
+body {
+  font-family: $font-family;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+
+  &.light-mode {
+    background-color: $light-background;
+    color: $text-color-dark;
+  }
+
+  &.dark-mode {
+    background-color: $dark-background;
+    color: $text-color-light;
+  }
+}
+
+.container {
+  width: 90%;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+
+  // Remove .search-input styles from here
+
+  .dark-mode & {
+    background-color: lighten($dark-background, 5%);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+
+    // Remove .search-input styles from here
+  }
+
+  // ... rest of the container styles ...
+}
+
+.dark-mode {
+  background-color: $dark-background;
+  color: $text-color-light;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+}
