@@ -21,3 +21,8 @@
 ##### Dark/Light Mode:
 
 - Implement a theme toggle using Context API to switch between dark and light modes.
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 9538041b49e5727558c91c5156fd7296f2aa15b8
