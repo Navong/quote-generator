@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useFavorites } from '../contexts/FavoritesContext';
+import { motion } from 'framer-motion';
 
 const HomeQuotes = () => {
   const { isDarkMode } = useTheme();
@@ -59,6 +60,16 @@ const HomeQuotes = () => {
 
   const currentQuote = quotes[currentQuoteIndex];
 
+  const buttonVariants = {
+    hover: {
+      scale: 1.05,
+      transition: { duration: 0.2 }
+    },
+    tap: {
+      scale: 0.95
+    }
+  };
+
   return (
     <div
       className={`p-4 ${isDarkMode ? 'bg-slate-800 text-white' : 'bg-white text-slate-800'}`}
@@ -71,39 +82,48 @@ const HomeQuotes = () => {
       </div>
 
       <div className="flex justify-between gap-4 mb-4">
-        <button
+        <motion.button
           onClick={goToPrevious}
-          className={`flex items-center justify-center w-full py-3 rounded-lg ${
+          variants={buttonVariants}
+          whileHover="hover"
+          whileTap="tap"
+          className={`flex items-center justify-center w-full py-3 rounded-lg transition-colors duration-300 ${
             isDarkMode
-              ? 'bg-green-400 text-slate-800'
-              : 'bg-green-600 text-white'
+              ? 'bg-green-400 text-slate-800 hover:bg-green-500'
+              : 'bg-green-600 text-white hover:bg-green-700'
           }`}
         >
           <ChevronLeft className="mr-2" size={20} />
           Previous
-        </button>
-        <button
+        </motion.button>
+        <motion.button
           onClick={goToNext}
-          className={`flex items-center justify-center w-full py-3 rounded-lg ${
+          variants={buttonVariants}
+          whileHover="hover"
+          whileTap="tap"
+          className={`flex items-center justify-center w-full py-3 rounded-lg transition-colors duration-300 ${
             isDarkMode
-              ? 'bg-green-400 text-slate-800'
-              : 'bg-green-600 text-white'
+              ? 'bg-green-400 text-slate-800 hover:bg-green-500'
+              : 'bg-green-600 text-white hover:bg-green-700'
           }`}
         >
           Next
           <ChevronRight className="ml-2" size={20} />
-        </button>
+        </motion.button>
       </div>
 
       <div className="flex justify-center">
-        <button
+        <motion.button
           onClick={toggleFavorite}
-          className={`flex items-center justify-center w-full py-3 rounded-lg ${
+          variants={buttonVariants}
+          whileHover="hover"
+          whileTap="tap"
+          className={`flex items-center justify-center w-full py-3 rounded-lg transition-colors duration-300 ${
             currentQuote.isFavorite
-              ? 'bg-yellow-400 text-slate-800'
+              ? 'bg-yellow-400 text-slate-800 hover:bg-yellow-500'
               : isDarkMode
-                ? 'bg-green-400 text-slate-800'
-                : 'bg-green-600 text-white'
+                ? 'bg-green-400 text-slate-800 hover:bg-green-500'
+                : 'bg-green-600 text-white hover:bg-green-700'
           }`}
         >
           <Star
@@ -114,7 +134,7 @@ const HomeQuotes = () => {
           {currentQuote.isFavorite
             ? 'Remove from Favorites'
             : 'Add to Favorites'}
-        </button>
+        </motion.button>
       </div>
     </div>
   );

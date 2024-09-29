@@ -22,7 +22,7 @@ const App = () => {
               </Routes>
             </main>
             <footer className="py-4 text-center">
-              <p>&copy; 2023 Quote App. All rights reserved.</p>
+              <p>&copy; 2024 Quote App. All rights reserved.</p>
             </footer>
           </div>
         </Router>  
