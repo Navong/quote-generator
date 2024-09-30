@@ -56,7 +56,9 @@ const quoteApi = {
         if (!response.ok) {
           throw new Error('Failed to remove favorite');
         }
-        return await response.json();
+        // Check if the response has content before parsing JSON
+        const text = await response.text();
+        return text ? JSON.parse(text) : { id };
       } catch (error) {
         console.error('Error removing favorite:', error);
         // Fallback to local storage

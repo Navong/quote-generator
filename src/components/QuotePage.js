@@ -19,10 +19,7 @@ const QuotePage = ({ darkMode, toggleDarkMode, user, onLogout }) => {
       const data = await quoteApi.getQuotes();
       if (data && typeof data === 'object') {
         setTimeout(() => {
-          setQuote({
-            ...data,
-            isFavorite: favoriteQuotes.some(fav => fav.quote.id === data.id)
-          });
+          setQuote(data);  // Remove the isFavorite property here
           setIsTransitioning(false);
           setIsLoading(false);
         }, 500);
@@ -80,14 +77,15 @@ const QuotePage = ({ darkMode, toggleDarkMode, user, onLogout }) => {
     return () => clearInterval(timer);
   }, []);
 
+  // New useEffect to handle isFavorite property
   useEffect(() => {
-    if (quote) {
-      setQuote(prevQuote => ({
-        ...prevQuote,
-        isFavorite: favoriteQuotes.some(fav => fav.quote.id === prevQuote.id)
-      }));
+    if (quote && favoriteQuotes.length > 0) {
+      const isFavorite = favoriteQuotes.some(fav => fav.quote.id === quote.id);
+      if (isFavorite !== quote.isFavorite) {
+        setQuote(prevQuote => ({ ...prevQuote, isFavorite }));
+      }
     }
-  }, [favoriteQuotes, quote]);
+  }, [quote, favoriteQuotes]);
 
   const toggleFavoritesList = () => {
     setShowFavorites(prev => !prev);
