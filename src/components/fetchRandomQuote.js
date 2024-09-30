@@ -1,4 +1,3 @@
-// const url = 'http://server.navong.xyz:4004';
 const url = 'http://quote.navong.xyz/api';
 
 export const fetchRandomQuote = async () => {
