@@ -26,7 +26,7 @@ services:
       context: .
       dockerfile: server/quoteback.dockerfile
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@server.navong.xyz:5432/quotable?schema=public
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/quotable?schema=public
     labels:
       - "traefik.http.routers.quoteback.rule=(Host(`quote.navong.xyz`) && PathPrefix(`/api`))"
     networks:
@@ -46,6 +46,8 @@ services:
 
 networks:
   traefik-network:
+    external: true
+  postgres-network:
     external: true
 
 volumes:

@@ -191,3 +191,40 @@
 }
 
 
+
+.quote-display {
+  transition: opacity 0.3s ease-in-out;
+  
+  &.fade-in {
+    opacity: 1;
+  }
+  
+  &.fade-out {
+    opacity: 0;
+  }
+
+  .quote-content {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+
+  .quote-author {
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+
+  button {
+    margin-right: 10px;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #45a049;
+    }
+  }
+}
