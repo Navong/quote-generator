@@ -31,6 +31,7 @@ services:
       - "traefik.http.routers.quoteback.rule=(Host(`quote.navong.xyz`) && PathPrefix(`/api`))"
     networks:
       - traefik-network
+    restart: always
 
 networks:
   traefik-network:
@@ -40,3 +41,4 @@ networks:
 
 volumes:
   postgres-data:
+
