@@ -4,21 +4,24 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "prisma": "npx prisma migrate dev --name init"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@prisma/client": "^5.20.0",
+    "@prisma/client": "^6.0.1",
+    "axios": "^1.7.9",
     "cors": "^2.8.5",
     "express": "^4.21.0",
     "nodejs": "^0.0.0",
     "nodemon": "^3.1.7",
-    "server": "file:"
+    "server": "file:",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
-    "prisma": "^5.20.0"
+    "prisma": "^6.0.1"
   }
 }
