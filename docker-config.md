@@ -1,3 +1,6 @@
 ```bash
-docker-compose --env-file .env up -d
+docker-compose build
+docker-compose --env-file .env.local up -d
+npx prisma db pull
+npx prisma generate
 ```

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../QuotePage.css'; // We'll create this CSS file for transitions
 import quoteApi from '../api/quoteApi'
-import Quote from './Quote';
 import Favorites from './Favorites';
 
 const QuotePage = ({ darkMode, toggleDarkMode, user, onLogout }) => {
@@ -12,6 +11,16 @@ const QuotePage = ({ darkMode, toggleDarkMode, user, onLogout }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isTransitioning, setIsTransitioning] = useState(false);
 
+  // Warm-up request
+  const warmUpApi = async () => {
+    try {
+      await quoteApi.getQuotes(); // Dummy call to ensure API is responsive
+      console.log('API warmed up successfully');
+    } catch (error) {
+      console.error('Failed to warm up API:', error);
+    }
+  };
+
   const fetchQuote = async () => {
     setIsTransitioning(true);
     setIsLoading(true);
@@ -19,7 +28,7 @@ const QuotePage = ({ darkMode, toggleDarkMode, user, onLogout }) => {
       const data = await quoteApi.getQuotes();
       if (data && typeof data === 'object') {
         setTimeout(() => {
-          setQuote(data);  // Remove the isFavorite property here
+          setQuote(data); // Remove the isFavorite property here
           setIsTransitioning(false);
           setIsLoading(false);
         }, 500);
@@ -51,7 +60,6 @@ const QuotePage = ({ darkMode, toggleDarkMode, user, onLogout }) => {
         setQuote(prevQuote => ({ ...prevQuote, isFavorite: newFavoriteStatus }));
       } catch (error) {
         console.error('Error toggling favorite:', error);
-        // Optionally, set an error state here to display to the user
       }
     }
   };
@@ -62,11 +70,13 @@ const QuotePage = ({ darkMode, toggleDarkMode, user, onLogout }) => {
       setFavoriteQuotes(favorites);
     } catch (error) {
       console.error('Error fetching favorites:', error);
-      // Optionally, set an error state here to display to the user
     }
   };
 
   useEffect(() => {
+    // Trigger warm-up request before fetching data
+    warmUpApi();
+
     fetchQuote();
     fetchFavorites();
 
@@ -100,17 +110,14 @@ const QuotePage = ({ darkMode, toggleDarkMode, user, onLogout }) => {
       }
     } catch (error) {
       console.error('Error removing favorite:', error);
-      // Optionally, set an error state here to display to the user
     }
   };
 
-  // Format the time as HH:MM:SS
-  const formattedTime = currentTime.toLocaleTimeString([], { 
-    hour: '2-digit', 
+  const formattedTime = currentTime.toLocaleTimeString([], {
+    hour: '2-digit',
     minute: '2-digit',
     second: '2-digit'
   });
-
 
   return (
     <div className={`min-h-screen flex flex-col items-center justify-center p-4 transition-colors duration-300 ${darkMode ? 'bg-gray-900' : 'bg-gray-100'}`}>
@@ -144,9 +151,9 @@ const QuotePage = ({ darkMode, toggleDarkMode, user, onLogout }) => {
 
       <div className={`w-full max-w-md rounded-lg p-6 mt-24 sm:mt-20 transition-all duration-300 shadow-lg ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}>
         {showFavorites ? (
-          <Favorites 
-            favoriteQuotes={favoriteQuotes} 
-            darkMode={darkMode} 
+          <Favorites
+            favoriteQuotes={favoriteQuotes}
+            darkMode={darkMode}
             onRemoveFavorite={removeFavorite}
           />
         ) : isLoading ? (

@@ -51,7 +51,7 @@ Contributions, issues, and feature requests are welcome! Feel free to check [iss
 
 ## 📝 License
 
-This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
+This project is licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
 ## 🙏 Acknowledgements
 
