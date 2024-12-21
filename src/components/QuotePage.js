@@ -140,12 +140,12 @@ const QuotePage = ({ darkMode, toggleDarkMode, user, onLogout }) => {
           >
             {showFavorites ? 'Current Quote' : 'Favorites'}
           </button>
-          <button
+          {/* <button
             onClick={onLogout}
             className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${darkMode ? 'bg-red-600 text-white hover:bg-red-700' : 'bg-red-500 text-white hover:bg-red-600'}`}
           >
             Logout
-          </button>
+          </button> */}
         </div>
       </header>
 
