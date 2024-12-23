@@ -17,14 +17,19 @@ app.use((req, res, next) => {
     next();
 });
 
-async function main() {
+async function main(cleanDb = false) {
     try {
-        for (let i = 0; i < 20; i++) {
-            console.log(`Fetch attempt ${i + 1} of 20`);
-            await fetchQuotesWithDelay();
+        if (cleanDb) {
+            await prisma.favorite.deleteMany();
+            await prisma.quote.deleteMany();
+            console.log('Database cleaned');
+        } else {
+            for (let i = 0; i < 20; i++) {
+                console.log(`Fetch attempt ${i + 1} of 20`);
+                await fetchQuotesWithDelay();
+            }
+            console.log('All data fetched and stored successfully');
         }
-
-        console.log('All data fetched and stored successfully');
     } catch (error) {
         console.error('Error in main function:', error);
     } finally {
@@ -35,7 +40,7 @@ async function main() {
 async function fetchQuotesWithDelay() {
     await fetchQuotes();
     // Wait for 5 seconds before the next fetch
-    await new Promise(resolve => setTimeout(resolve, 5000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 }
 
 async function fetchQuotes() {
@@ -67,6 +72,7 @@ async function fetchQuotes() {
                 update: {
                     content: quote.content,
                     author: quote.author,
+                    tags: quote.tags,
                     authorSlug: quote.authorSlug,
                     length: quote.length,
                     dateModified: new Date()
@@ -75,8 +81,9 @@ async function fetchQuotes() {
                     externalId: quote._id,
                     content: quote.content,
                     author: quote.author,
+                    tags: quote.tags,
                     authorSlug: quote.authorSlug,
-                    length: quote.length
+                    length: quote.length,
                 }
             })
         ));
@@ -90,54 +97,6 @@ async function fetchQuotes() {
         }
     }
 }
-
-// async function fetchAuthors() {
-//     const response = await axios.get('https://api.quotable.io/authors');
-//     const authors = response.data.results;
-
-//     await Promise.all(authors.map(author =>
-//         prisma.author.upsert({
-//             where: { slug: author.slug },
-//             update: {
-//                 name: author.name,
-//                 bio: author.bio,
-//                 link: author.link,
-//                 quoteCount: author.quoteCount,
-//                 dateModified: new Date()
-//             },
-//             create: {
-//                 name: author.name,
-//                 slug: author.slug,
-//                 bio: author.bio,
-//                 link: author.link,
-//                 quoteCount: author.quoteCount
-//             }
-//         })
-//     ));
-
-//     console.log(`${authors.length} authors fetched and stored successfully`);
-// }
-
-// async function fetchTags() {
-//     const response = await axios.get('https://api.quotable.io/tags');
-//     const tags = response.data;
-
-//     await Promise.all(tags.map(tag =>
-//         prisma.tag.upsert({
-//             where: { name: tag.name },
-//             update: {
-//                 quoteCount: tag.quoteCount,
-//                 dateModified: new Date()
-//             },
-//             create: {
-//                 name: tag.name,
-//                 quoteCount: tag.quoteCount
-//             }
-//         })
-//     ));
-
-//     console.log(`${tags.length} tags fetched and stored successfully`);
-// }
 
 main()
     .catch(e => {
