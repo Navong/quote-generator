@@ -1,9 +1,14 @@
 const express = require('express');
-const { getFavoritesByUserHandler, addFavoriteHandler, getTopFavoritesHandler } = require('../controllers/favoriteController');
 const router = express.Router();
+const favoriteController = require('../controllers/favoriteController'); // Controller for handling logic
 
-router.get('/:userId', getFavoritesByUserHandler);
-router.get('/top', getTopFavoritesHandler);
-router.post('/', addFavoriteHandler);
+// Add a favorite for a specific user
+router.post('/', favoriteController.addFavorite);
+
+// Get all favorites for a specific user
+router.get('/:userId', favoriteController.getFavoritesForUser);
+
+// Remove a favorite for a specific user
+router.delete('/:userId', favoriteController.removeFavorite);
 
 module.exports = router;

@@ -22,12 +22,7 @@ const App = () => {
 
   return (
     <div className={darkMode ? 'dark' : ''}>
-      {user ? (
-        // console.log('It was test version.')
-        <QuotePage darkMode={darkMode} toggleDarkMode={toggleDarkMode} user={user} onLogout={handleLogout} />
-      ) : (
-        <LoginPage darkMode={darkMode} onLogin={handleLogin} />
-      )}
+      <QuotePage darkMode={darkMode} toggleDarkMode={toggleDarkMode} user={user} onLogout={handleLogout} />
     </div>
   );
 };

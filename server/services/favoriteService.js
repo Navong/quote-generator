@@ -1,5 +1,4 @@
 const { PrismaClient } = require('@prisma/client');
-const { result } = require('lodash');
 const prisma = new PrismaClient();
 
 const getFavoritesByUser = async (userId) => {
@@ -11,7 +10,10 @@ const getFavoritesByUser = async (userId) => {
 
 const addFavorite = async (favoriteData) => {
     return prisma.favorite.create({
-        data: favoriteData,
+        data: {
+            userId: favoriteData.userId,
+            quoteId: favoriteData.quoteId,
+        },
     });
 };
 
